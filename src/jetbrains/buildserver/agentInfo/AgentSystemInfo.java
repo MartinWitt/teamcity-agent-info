@@ -111,7 +111,7 @@ public class AgentSystemInfo extends AgentLifeCycleAdapter {
         }
       }
     } catch (Throwable e) {
-      LOG.info("Class 'com.sun.management.OperatingSystemMXBean' not found or another error, using alternative way to get total memory. Error encountered: " + e.toString());
+      LOG.info("Class 'com.sun.management.OperatingSystemMXBean' not found or another error, using alternative way to get total memory. Error encountered: " + e);
       try {
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
         Object attribute = mBeanServer.getAttribute(new ObjectName("java.lang","type","OperatingSystem"), "TotalPhysicalMemorySize");
@@ -120,7 +120,7 @@ public class AgentSystemInfo extends AgentLifeCycleAdapter {
           return myPhysicalMemoryInMb;
         }
       } catch (Throwable e1) {
-        LOG.warn("Failed to get total memory size: " + e1.toString());
+        LOG.warn("Failed to get total memory size: " + e1);
       }
     }
     return null;
